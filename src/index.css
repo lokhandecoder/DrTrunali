@@ -1,0 +1,127 @@
+@import "tailwindcss";
+
+@layer base {
+  body {
+    font-family: 'Outfit', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  }
+}
+
+.font-serif-luxury {
+  font-family: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
+}
+
+.font-serif-display {
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+.font-italiana {
+  font-family: 'Italiana', 'Playfair Display', serif;
+}
+
+.font-script {
+  font-family: 'Pinyon Script', 'Alex Brush', 'Parisienne', 'Great Vibes', cursive;
+}
+
+.font-alex {
+  font-family: 'Alex Brush', 'Parisienne', cursive;
+}
+
+.font-pinyon {
+  font-family: 'Pinyon Script', cursive;
+}
+
+.font-parisienne {
+  font-family: 'Parisienne', cursive;
+}
+
+/* Shimmer gold & rose highlights */
+@keyframes shimmerText {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-shimmer-text {
+  background-size: 200% auto;
+  animation: shimmerText 5s ease infinite;
+}
+
+@keyframes floatGentle {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(2deg);
+  }
+}
+
+.animate-float-gentle {
+  animation: floatGentle 5s ease-in-out infinite;
+}
+
+@keyframes pulseHalo {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.08);
+  }
+}
+
+.animate-pulse-halo {
+  animation: pulseHalo 4s ease-in-out infinite;
+}
+
+/* --- LUXURY THEMES BACKGROUNDS --- */
+
+/* 1. Rose & Champagne Luxury (Default) */
+.theme-rose-champagne {
+  background-color: #FAF5F0;
+  background-image: 
+    radial-gradient(at 15% 15%, rgba(253, 226, 228, 0.85) 0px, transparent 50%),
+    radial-gradient(at 85% 20%, rgba(254, 215, 226, 0.75) 0px, transparent 55%),
+    radial-gradient(at 50% 50%, rgba(255, 250, 246, 0.95) 0px, transparent 65%),
+    radial-gradient(at 80% 85%, rgba(254, 237, 213, 0.8) 0px, transparent 50%),
+    radial-gradient(at 20% 85%, rgba(254, 205, 211, 0.6) 0px, transparent 50%);
+}
+
+/* 2. Midnight Starlight & Velvet */
+.theme-midnight-starlight {
+  background-color: #0b0d1b;
+  background-image: 
+    radial-gradient(at 20% 20%, rgba(88, 28, 135, 0.5) 0px, transparent 60%),
+    radial-gradient(at 80% 15%, rgba(190, 24, 93, 0.4) 0px, transparent 55%),
+    radial-gradient(at 50% 50%, rgba(15, 23, 42, 0.95) 0px, transparent 70%),
+    radial-gradient(at 75% 85%, rgba(67, 56, 202, 0.45) 0px, transparent 60%),
+    radial-gradient(at 15% 85%, rgba(131, 24, 67, 0.4) 0px, transparent 55%);
+}
+
+/* 3. Sunset Warmth & Amber Glow */
+.theme-sunset-amber {
+  background-color: #FFF7ED;
+  background-image: 
+    radial-gradient(at 15% 15%, rgba(254, 215, 170, 0.8) 0px, transparent 50%),
+    radial-gradient(at 85% 20%, rgba(254, 202, 202, 0.75) 0px, transparent 55%),
+    radial-gradient(at 50% 50%, rgba(255, 251, 235, 0.95) 0px, transparent 65%),
+    radial-gradient(at 80% 85%, rgba(253, 230, 138, 0.8) 0px, transparent 50%),
+    radial-gradient(at 20% 85%, rgba(251, 146, 60, 0.35) 0px, transparent 50%);
+}
+
+/* 4. Lavender & Blossom Mist */
+.theme-lavender-mist {
+  background-color: #FAF5FF;
+  background-image: 
+    radial-gradient(at 15% 15%, rgba(243, 232, 255, 0.9) 0px, transparent 50%),
+    radial-gradient(at 85% 20%, rgba(252, 231, 243, 0.85) 0px, transparent 55%),
+    radial-gradient(at 50% 50%, rgba(255, 255, 255, 0.95) 0px, transparent 65%),
+    radial-gradient(at 80% 85%, rgba(233, 213, 255, 0.75) 0px, transparent 50%),
+    radial-gradient(at 20% 85%, rgba(244, 114, 182, 0.3) 0px, transparent 50%);
+}

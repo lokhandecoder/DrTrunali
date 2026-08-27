@@ -1,0 +1,6 @@
+{
+  "name": "Date Invitation",
+  "description": "An interactive, playful invitation asking for a date in the first week of September with runaway 'No' button and blooming celebration.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
