@@ -11,11 +11,13 @@ import {
   Clock,
   Calendar,
   MailOpen,
-  ArrowRight
+  ArrowRight,
+  BookOpen
 } from 'lucide-react';
 import { FloatingPetals } from './components/FloatingPetals';
 import { DodgeButton } from './components/DodgeButton';
 import { CelebrationModal } from './components/CelebrationModal';
+import { ConfessionModal } from './components/ConfessionModal';
 import { soundEffects } from './utils/audio';
 import { fireCelebrationConfetti, fireFlowerSparkles } from './utils/confetti';
 import { THEMES } from './utils/themes';
@@ -28,6 +30,7 @@ export default function App() {
   const [hasOpenedLetter, setHasOpenedLetter] = useState(false);
   const [isAccepted, setIsAccepted] = useState(false);
   const [showCelebrationModal, setShowCelebrationModal] = useState(false);
+  const [showConfessionModal, setShowConfessionModal] = useState(false);
   const [dodgeCount, setDodgeCount] = useState(0);
   const [soundOn, setSoundOn] = useState(true);
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -48,6 +51,11 @@ export default function App() {
     soundEffects.playPopSound();
     fireFlowerSparkles(0.5, 0.5);
     setHasOpenedLetter(true);
+  };
+
+  const handleOpenConfession = () => {
+    soundEffects.playPopSound();
+    setShowConfessionModal(true);
   };
 
   const handleYesClick = () => {
@@ -115,6 +123,19 @@ export default function App() {
 
       {/* Minimal Top Control Bar */}
       <header className="fixed top-4 right-4 z-30 flex items-center gap-2 pointer-events-auto">
+        {/* Confession Button */}
+        <button
+          id="top-confession-button"
+          type="button"
+          onClick={handleOpenConfession}
+          className="px-3.5 py-2 rounded-full backdrop-blur-md border shadow-sm transition-all cursor-pointer bg-purple-950/80 hover:bg-purple-900 border-purple-500/50 text-pink-200 hover:text-white flex items-center gap-1.5 text-xs font-semibold"
+          title="Read My Confession"
+          aria-label="Read My Confession"
+        >
+          <BookOpen className="w-3.5 h-3.5 text-pink-400" />
+          <span>My Confession 💌</span>
+        </button>
+
         {/* Re-open Letter Box Button */}
         {hasOpenedLetter && (
           <button
@@ -246,11 +267,25 @@ export default function App() {
                 "Some moments are too special to wait for... someone has a heartfelt question to ask you."
               </p>
 
-              {/* Open Letter Action Pill */}
-              <div className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-gradient-to-r from-pink-500 via-rose-500 to-purple-600 text-white font-bold text-sm sm:text-base shadow-lg shadow-pink-500/30 group-hover:shadow-pink-500/50 group-hover:scale-105 transition-all duration-300">
-                <Heart className="w-4 h-4 fill-white" />
-                <span>Open Letter 💌</span>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              {/* Action Buttons */}
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+                <div className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-gradient-to-r from-pink-500 via-rose-500 to-purple-600 text-white font-bold text-sm sm:text-base shadow-lg shadow-pink-500/30 group-hover:shadow-pink-500/50 group-hover:scale-105 transition-all duration-300">
+                  <Heart className="w-4 h-4 fill-white" />
+                  <span>Open Letter 💌</span>
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </div>
+
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleOpenConfession();
+                  }}
+                  className="px-5 py-3 rounded-full border border-purple-500/40 bg-purple-950/60 hover:bg-purple-900/80 text-pink-200 hover:text-white font-semibold text-xs sm:text-sm transition-all flex items-center gap-2"
+                >
+                  <BookOpen className="w-4 h-4 text-pink-400" />
+                  <span>Read Confession 🤫</span>
+                </button>
               </div>
             </motion.div>
           ) : !isAccepted ? (
@@ -310,7 +345,7 @@ export default function App() {
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 }}
-                className="mx-auto mb-5 max-w-md px-4 py-3 rounded-2xl border text-xs sm:text-sm leading-relaxed shadow-sm transition-all bg-purple-950/50 border-purple-500/40 text-purple-200"
+                className="mx-auto mb-4 max-w-md px-4 py-3 rounded-2xl border text-xs sm:text-sm leading-relaxed shadow-sm transition-all bg-purple-950/50 border-purple-500/40 text-purple-200"
               >
                 <div className="flex items-center justify-center gap-1.5 font-bold text-[11px] uppercase tracking-wider text-pink-300 mb-0.5">
                   <Sparkles className="w-3.5 h-3.5 text-amber-400" />
@@ -321,6 +356,19 @@ export default function App() {
                   "It’s been one week today since we started talking... and for that reason, let’s move further by meeting for a real date!"
                 </p>
               </motion.div>
+
+              {/* Confession Link Pill */}
+              <div className="mb-5">
+                <button
+                  type="button"
+                  onClick={handleOpenConfession}
+                  className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-semibold transition-all bg-pink-500/15 hover:bg-pink-500/25 border border-pink-400/40 text-pink-200 hover:text-white cursor-pointer shadow-sm"
+                >
+                  <BookOpen className="w-3.5 h-3.5 text-pink-400" />
+                  <span>I have a confession to make... 🤫 Read here</span>
+                  <Sparkles className="w-3 h-3 text-amber-300" />
+                </button>
+              </div>
 
               {/* The Core Question */}
               <h1 className="font-serif-luxury text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight leading-tight sm:leading-tight mb-4 text-white">
@@ -434,19 +482,30 @@ export default function App() {
                   </div>
                 </div>
 
-                <button
-                  id="reopen-dialog-btn"
-                  type="button"
-                  onClick={() => {
-                    soundEffects.playPopSound();
-                    fireCelebrationConfetti();
-                    setShowCelebrationModal(true);
-                  }}
-                  className="px-3.5 py-2 rounded-xl text-xs font-semibold border flex items-center gap-1.5 cursor-pointer transition-all hover:scale-105 shadow-sm bg-purple-900/50 hover:bg-purple-800 text-purple-200 border-purple-500/40"
-                >
-                  <Sparkles className="w-3.5 h-3.5 text-amber-300" />
-                  <span>View Details Dialog</span>
-                </button>
+                <div className="flex items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={handleOpenConfession}
+                    className="px-3.5 py-2 rounded-xl text-xs font-semibold border flex items-center gap-1.5 cursor-pointer transition-all hover:scale-105 shadow-sm bg-pink-950/50 hover:bg-pink-900 text-pink-200 border-pink-500/40"
+                  >
+                    <BookOpen className="w-3.5 h-3.5 text-pink-400" />
+                    <span>Confession</span>
+                  </button>
+
+                  <button
+                    id="reopen-dialog-btn"
+                    type="button"
+                    onClick={() => {
+                      soundEffects.playPopSound();
+                      fireCelebrationConfetti();
+                      setShowCelebrationModal(true);
+                    }}
+                    className="px-3.5 py-2 rounded-xl text-xs font-semibold border flex items-center gap-1.5 cursor-pointer transition-all hover:scale-105 shadow-sm bg-purple-900/50 hover:bg-purple-800 text-purple-200 border-purple-500/40"
+                  >
+                    <Sparkles className="w-3.5 h-3.5 text-amber-300" />
+                    <span>View Details</span>
+                  </button>
+                </div>
               </div>
 
               {/* Calendar Action */}
@@ -485,6 +544,15 @@ export default function App() {
         isOpen={showCelebrationModal}
         friendName={friendName}
         onClose={() => setShowCelebrationModal(false)}
+        theme={activeTheme}
+        fontStyleClass={fontStyleClass}
+      />
+
+      {/* Heartfelt Confession Dialog */}
+      <ConfessionModal
+        isOpen={showConfessionModal}
+        friendName={friendName}
+        onClose={() => setShowConfessionModal(false)}
         theme={activeTheme}
         fontStyleClass={fontStyleClass}
       />
